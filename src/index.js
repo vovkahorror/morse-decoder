@@ -38,28 +38,28 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-  let morse = "";
-  let str;
-  let substr;
+  let phrase = "";
+  let letter;
+  let symbol;
   for (let i = 0; i < expr.length; i += 10) {
-    str = "";
-    substr = expr.substr(i, 10);
-    if (substr.includes("*")) {
-      morse += " ";
+    letter = "";
+    symbol = expr.substr(i, 10);
+    if (symbol.includes("*")) {
+      phrase += " ";
       continue;
     } else {
-      for (let j = substr.length - 1; j >= 0; j -= 2) {
-        if (substr.endsWith("10")) {
-          str = "." + str;
-        } else if (substr.endsWith("11")) {
-          str = "-" + str;
+      for (let j = symbol.length - 1; j >= 0; j -= 2) {
+        if (symbol.endsWith("10")) {
+          letter = "." + letter;
+        } else if (symbol.endsWith("11")) {
+          letter = "-" + letter;
         }
-        substr = substr.slice(0, j - 1);
+        symbol = symbol.slice(0, j - 1);
       }
     }
-    morse += MORSE_TABLE[str];
+    phrase += MORSE_TABLE[letter];
   }
-  return morse;
+  return phrase;
 }
 
 module.exports = {
